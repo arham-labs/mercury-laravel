@@ -1,0 +1,23 @@
+{
+    "name": "arhamlabs/notification_handler",
+    "autoload": {
+        "psr-4": {
+            "Arhamlabs\\NotificationHandler\\": "src/"
+        },
+        "psr-0": {
+            "interface": "interface/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Arhamlabs\\NotificationHandler\\NotificationHandlerServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "kreait/firebase-php": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
