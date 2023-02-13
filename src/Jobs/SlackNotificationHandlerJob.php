@@ -45,23 +45,27 @@ class SlackNotificationHandlerJob implements ShouldQueue
         Log::debug("Timestamp: " . strval(date("dS M, Y H:i:s")));
         #Check if slack is enabled then notify the slack channel
         if (config('al_notification_config.enable_notification') === true) {
+            if (config('al_notification_config.notification_type.slack') === true) {
+                Log::debug("\nSlack is enabled, now sending slack notifications");
 
-            Log::debug("\nSlack is enabled, now sending slack notifications");
+                $response = Http::withHeaders([
+                    'Content-type' => 'application/json',
+                ])->post(config('al_notification_config.slack_webhook_url'), [
+                    'text' => $this->notificationObject["body"]
+                ]);
 
-            $response = Http::withHeaders([
-                'Content-type' => 'application/json',
-            ])->post(config('al_notification_config.slack_webhook_url'), [
-                'text' => $this->notificationObject["body"]
-            ]);
+                #If Http request failed to send message to slack log the message
+                if (!$response->ok()) {
+                    Log::debug("Error encountered while sending slack message:\n");
+                    Log::debug($response->body());
+                } else {
+                    Log::debug("Slack message sent successfully");
+                }
+            } else
+                Log::debug(config("Slack Send notification is disable in config.For slack notification allow notification_type['slack'] in config setting"));
+        } else
+            Log::debug(config("Send notification is disable in config.For send notification allow enable_notification in config setting"));
 
-            #If Http request failed to send message to slack log the message
-            if (!$response->ok()) {
-                Log::debug("Error encountered while sending slack message:\n");
-                Log::debug($response->body());
-            } else {
-                Log::debug("Slack message sent successfully");
-            }
-        }
 
         Log::debug("##########################################################################");
 

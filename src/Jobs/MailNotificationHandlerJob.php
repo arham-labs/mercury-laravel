@@ -45,32 +45,35 @@ class MailNotificationHandlerJob implements ShouldQueue
 
         Log::debug("Timestamp: " . strval(date("dS M, Y H:i:s")));
 
-        Log::debug(config("al_notification_config.project_name"));
-        Log::debug(config('al_notification_config.enable_notification'));
         #Check if email is enabled then notify emails in the config
         if (config('al_notification_config.enable_notification') === true) {
-            Log::debug("\nEmail is enabled, now sending email notifications");
+            if (config('al_notification_config.notification_type.mail') === true) {
+                Log::debug("\nEmail is enabled, now sending email notifications");
 
-            Log::debug("\nBody:\n");
+                Log::debug("\nBody:\n");
 
-            $emailsToNotify = config('al_notification_config.notifiable_emails');
+                $emailsToNotify = config('al_notification_config.notifiable_emails');
 
-            Log::debug(json_encode($emailsToNotify));
-            $this->notificationObject["subject"] = !empty($this->notificationObject["subject"]) ? $this->notificationObject["subject"] : "Api Error in " . config("al_notification_config.project_name") . "!";
-            $this->notificationObject["view"] = !empty($this->notificationObject["view"]) ? $this->notificationObject["view"] : "mails.notification_handler_email";
-            // dd($this->notificationObject);
-            try {
-                #Iterate and send emails
-                foreach ($emailsToNotify as $email) {
-                    #Send mail to the emails
-                    $sendMail =  Mail::to($email)->send(new NotificationHandlerMail($this->notificationObject));
+                Log::debug(json_encode($emailsToNotify));
+                $this->notificationObject["subject"] = !empty($this->notificationObject["subject"]) ? $this->notificationObject["subject"] : "Api Error in " . config("al_notification_config.project_name") . "!";
+                $this->notificationObject["view"] = !empty($this->notificationObject["view"]) ? $this->notificationObject["view"] : "mails.notification_handler_email";
+                // dd($this->notificationObject);
+                try {
+                    #Iterate and send emails
+                    foreach ($emailsToNotify as $email) {
+                        #Send mail to the emails
+                        $sendMail =  Mail::to($email)->send(new NotificationHandlerMail($this->notificationObject));
+                    }
+                } catch (Exception $e) {
+                    #If Mail had any errors
+                    Log::debug("\nMail Errors:");
+                    Log::debug($e);
                 }
-            } catch (Exception $e) {
-                #If Mail had any errors
-                Log::debug("\nMail Errors:");
-                Log::debug($e);
-            }
-        }
+            } else
+                Log::debug(config("Mail Send notification is disable in config.For mail notification allow notification_type['slack'] in config setting"));
+        } else
+            Log::debug(config("Send notification is disable in config.For send notification allow enable_notification in config setting"));
+
 
         Log::debug("##########################################################################");
 

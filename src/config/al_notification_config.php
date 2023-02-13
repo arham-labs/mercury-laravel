@@ -43,9 +43,9 @@ return [
     */
 
     'notification_type' => [
-        'email' => true,
+        'email' => false,
         'slack' => false,
-        'firebase' => true
+        'firebase' => false
     ],
 
     /*
@@ -89,6 +89,6 @@ return [
     */
     'firebase' => [
         's3_path' => env('S3_FIREBASE_JSON_PATH', null),
-        'local_path' => public_pathcls(env('LOCAL_FIREBASE_JSON_PATH'))
+        'local_path' => public_path(env('LOCAL_FIREBASE_JSON_PATH'))
     ],
 ];
