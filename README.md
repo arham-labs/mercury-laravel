@@ -103,3 +103,26 @@ Example-
 LOCAL_FIREBASE_JSON_PATH='firebase/request.json'
 
 ````
+For send push notification on user device you require firebase token.
+
+Example -
+
+``` bash
+ $tokens = [
+            'token 1',
+            'token 2',
+            'token 3'
+           ];
+            $requestJson = [
+                "title" => 'Test',
+                "subtitle" => 'Testing',
+                "data" => [
+                    "redirection" => "/homeScreen",
+                    "arguments" => json_encode(array(
+                        'userUuid' => 'userUuid'
+                    ))
+                ]
+            ];
+            dispatch(new FirebaseNotificationHandlerJob($tokens, $requestJson));
+
+```
