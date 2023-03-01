@@ -13,7 +13,7 @@ composer require arhamlabs/notification_handler
 ## Usage
 
 ### Mail
-For mail notification in config file al_notification_config.php enable following flags
+For mail notification in config file alNotificationConfig.php enable following flags
 
 ```bash
 'enable_notification' => true,
@@ -44,7 +44,7 @@ use Arhamlabs\NotificationHandler\Jobs\MailNotificationHandlerJob;
 
 
 ### Slack
-For slack notification in config file al_notification_config.php enable following flags
+For slack notification in config file alNotificationConfig.php enable following flags
 
 ```bash
 'enable_notification' => true,
@@ -76,7 +76,7 @@ use Arhamlabs\NotificationHandler\Jobs\SlackNotificationHandlerJob;
 
 
 ### Firebase
-For slack notification in config file al_notification_config.php enable following flags
+For slack notification in config file alNotificationConfig.php enable following flags
 
 ```bash
 'enable_notification' => true,
@@ -108,6 +108,10 @@ For send push notification on user device you require firebase token.
 Example -
 
 ``` bash
+
+
+use Arhamlabs\NotificationHandler\Jobs\FirebaseNotificationHandlerJob;
+
  $tokens = [
             'token 1',
             'token 2',

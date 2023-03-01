@@ -13,14 +13,14 @@ trait FirebasePushNotificationTrait
     public  function sendFirebasePushNotification($tokens, $requestJson)
     {
         //check firebase json path 
-        if (!empty(config('al_notification_config.firebase.s3_path')) || !empty(config('al_notification_config.firebase.local_path'))) {
+        if (!empty(config('alNotificationConfig.firebase.s3_path')) || !empty(config('alNotificationConfig.firebase.local_path'))) {
 
-            Log::debug(config('al_notification_config.firebase'));
+            Log::debug(config('alNotificationConfig.firebase'));
             //function will access json file either local path or S3 bucket
-            if (!empty(config('al_notification_config.firebase.s3_path')))
-                $factory = (new Factory)->withServiceAccount(Storage::disk('s3')->get(config('al_notification_config.firebase.s3_path')));
+            if (!empty(config('alNotificationConfig.firebase.s3_path')))
+                $factory = (new Factory)->withServiceAccount(Storage::disk('s3')->get(config('alNotificationConfig.firebase.s3_path')));
             else {
-                $factory = (new Factory)->withServiceAccount(config('al_notification_config.firebase.local_path'));
+                $factory = (new Factory)->withServiceAccount(config('alNotificationConfig.firebase.local_path'));
             }
 
             $messaging  = $factory->createMessaging();

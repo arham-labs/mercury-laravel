@@ -46,16 +46,16 @@ class MailNotificationHandlerJob implements ShouldQueue
         Log::debug("Timestamp: " . strval(date("dS M, Y H:i:s")));
 
         #Check if email is enabled then notify emails in the config
-        if (config('al_notification_config.enable_notification') === true) {
-            if (config('al_notification_config.notification_type.mail') === true) {
+        if (config('alNotificationConfig.enable_notification') === true) {
+            if (config('alNotificationConfig.notification_type.mail') === true) {
                 Log::debug("\nEmail is enabled, now sending email notifications");
 
                 Log::debug("\nBody:\n");
 
-                $emailsToNotify = config('al_notification_config.notifiable_emails');
+                $emailsToNotify = config('alNotificationConfig.notifiable_emails');
 
                 Log::debug(json_encode($emailsToNotify));
-                $this->notificationObject["subject"] = !empty($this->notificationObject["subject"]) ? $this->notificationObject["subject"] : "Api Error in " . config("al_notification_config.project_name") . "!";
+                $this->notificationObject["subject"] = !empty($this->notificationObject["subject"]) ? $this->notificationObject["subject"] : "Api Error in " . config("alNotificationConfig.project_name") . "!";
                 $this->notificationObject["view"] = !empty($this->notificationObject["view"]) ? $this->notificationObject["view"] : "mails.notification_handler_email";
                 // dd($this->notificationObject);
                 try {

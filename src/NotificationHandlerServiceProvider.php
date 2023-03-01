@@ -24,7 +24,7 @@ class NotificationHandlerServiceProvider extends ServiceProvider
     {
         if (app()->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/config/al_notification_config.php' => config_path('al_notification_config.php'),
+                __DIR__ . '/config/alNotificationConfig.php' => config_path('alNotificationConfig.php'),
             ], 'config');
 
             $this->publishes([

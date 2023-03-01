@@ -44,13 +44,13 @@ class SlackNotificationHandlerJob implements ShouldQueue
 
         Log::debug("Timestamp: " . strval(date("dS M, Y H:i:s")));
         #Check if slack is enabled then notify the slack channel
-        if (config('al_notification_config.enable_notification') === true) {
-            if (config('al_notification_config.notification_type.slack') === true) {
+        if (config('alNotificationConfig.enable_notification') === true) {
+            if (config('alNotificationConfig.notification_type.slack') === true) {
                 Log::debug("\nSlack is enabled, now sending slack notifications");
 
                 $response = Http::withHeaders([
                     'Content-type' => 'application/json',
-                ])->post(config('al_notification_config.slack_webhook_url'), [
+                ])->post(config('alNotificationConfig.slack_webhook_url'), [
                     'text' => $this->notificationObject["body"]
                 ]);
 

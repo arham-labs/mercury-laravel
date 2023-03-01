@@ -44,7 +44,7 @@ class FirebaseNotificationHandlerJob implements ShouldQueue
         Log::debug("Timestamp: " . strval(date("dS M, Y H:i:s")));
 
         #Check if firebase is enabled then notify the firebase channel
-        if (config('al_notification_config.notification_type.firebase') === true) {
+        if (config('alNotificationConfig.notification_type.firebase') === true) {
             Log::debug("Firebase is enabled, now sending firebase push notifications");
             $this->sendFirebasePushNotification($this->tokens, $this->notificationObject);
         } else
