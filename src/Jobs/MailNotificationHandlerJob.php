@@ -47,7 +47,7 @@ class MailNotificationHandlerJob implements ShouldQueue
 
         #Check if email is enabled then notify emails in the config
         if (config('alNotificationConfig.enable_notification') === true) {
-            if (config('alNotificationConfig.notification_type.mail') === true) {
+            if (config('alNotificationConfig.notification_type.email') === true) {
                 Log::debug("\nEmail is enabled, now sending email notifications");
 
                 Log::debug("\nBody:\n");
@@ -70,7 +70,7 @@ class MailNotificationHandlerJob implements ShouldQueue
                     Log::debug($e);
                 }
             } else
-                Log::debug(config("Mail Send notification is disable in config.For mail notification allow notification_type['slack'] in config setting"));
+                Log::debug(config("Mail Send notification is disable in config.For mail notification allow notification_type['mail'] in config setting"));
         } else
             Log::debug(config("Send notification is disable in config.For send notification allow enable_notification in config setting"));
 
