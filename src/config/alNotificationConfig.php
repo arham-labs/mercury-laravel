@@ -45,7 +45,8 @@ return [
     'notification_type' => [
         'email' => false,
         'slack' => false,
-        'firebase' => false
+        'firebase' => false,
+        'sms' => false
     ],
 
     /*
@@ -58,7 +59,7 @@ return [
     |
     */
 
-    'notifiable_emails' => ['siddheshkini@arhamlabs.com'],
+    'notifiable_emails' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -83,12 +84,26 @@ return [
     |
     | If you have enabled firebase notifications for the user then it required firebase json 
     | file to access firebase.You can provide this json via s3 or local storage.
-    | Note: For this add an env variable SLACK_WEBHOOK_URL which
-    | has the webhook url for the slack channel
     |
     */
     'firebase' => [
         's3_path' => env('S3_FIREBASE_JSON_PATH', null),
         'local_path' => public_path(env('LOCAL_FIREBASE_JSON_PATH'))
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | SMS Push Notification
+    |--------------------------------------------------------------------------
+    |
+    | If you have enabled sms notifications for the user then it required followings keys to access twilio sms service.
+      Update env file with these key.
+    |
+    */
+    'twilio-sms' => [
+        'TWILIO_SID' => env('TWILIO_SID', null),
+        'TWILIO_TOKEN' => env('TWILIO_TOKEN', null),
+        'TWILIO_FROM' => env('TWILIO_FROM', null)
     ],
 ];

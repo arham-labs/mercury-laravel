@@ -16,7 +16,8 @@
         }
     },
     "require": {
-        "kreait/firebase-php": "*"
+        "kreait/firebase-php": "*",
+        "twilio/sdk": "^7.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
