@@ -92,11 +92,20 @@ return [
     ],
 
 
+
     /*
     |--------------------------------------------------------------------------
     | SMS Push Notification
     |--------------------------------------------------------------------------
     |
+    |    
+    | select sms service provider to send the sms.(for example twilio/kaleyra)
+    |
+    */
+    'sms_service_provider' => "twilio",
+
+    /*
+    |---------------------------------TWILIO------------------------------------------
     | If you have enabled sms notifications for the user then it required followings keys to access twilio sms service.
       Update env file with these key.
     |
@@ -105,5 +114,17 @@ return [
         'TWILIO_SID' => env('TWILIO_SID', null),
         'TWILIO_TOKEN' => env('TWILIO_TOKEN', null),
         'TWILIO_FROM' => env('TWILIO_FROM', null)
+    ],
+
+    /*
+    |--------------------------------- KALEYRA ------------------------------------------
+    | If you have enabled sms notifications for the user then it required followings keys to access kaleyra sms service.
+      Update env file with these key.
+    |
+    */
+    'kaleyra-sms' => [
+        'KALEYRA_API_KEY' => env('KALEYRA_API_KEY', null),
+        'KALEYRA_SENDER_ID' => env('KALEYRA_SENDER_ID', null),
+        'KALEYRA_SID' => env('KALEYRA_SID', null)
     ],
 ];
